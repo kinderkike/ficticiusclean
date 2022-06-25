@@ -33,7 +33,7 @@ public class Veiculo {
 
 	@Column(name = "CONSUMO_RODOVIA", nullable = false)
 	private double consumoRodovia;
-
+	
 	public Long getId() {
 		return id;
 	}
