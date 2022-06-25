@@ -10,19 +10,19 @@ Foram utilizados as seguintes tecnologias
 
 # Configurar e executar (Windows)
 
-1. Clonar a branch **main** em uma pasta no seu computador utilizando o seguinte comando:
+1. Abra o **Git Bash** e acesse a pasta no seu computador onde será realizado o clone da branch
+2. Utilize o seguinte comando para clonar a brach **main**:
 > git clone https://github.com/kinderkike/ficticiusclean.git
 
-2. Abra o **Promp de Comando** e acesse a pasta onde foi realizado o clone da branch
-3. Execute o seguinte comando para executar os testes e compilar:
-> mvnw clean install
-4. Após a execução do comando o maven irá gerar pasta **target** com vários arquivos
-5. Acesse a pasta **target** e execute o seguinte comando para levantar a aplicação:
+3. Acesse a pasta **/ficticiusclean/** onde foi realizado o clone da branch
+4. Execute o seguinte comando para executar os testes e compilar:
+> ./mvnw clean install
+5. Após a execução do comando o maven irá gerar pasta **/ficticiusclean/target/** com vários arquivos
+6. Acesse a pasta **target** e execute o seguinte comando para iniciar a aplicação:
 > java -jar ficticiusclean-0.0.1-SNAPSHOT.jar
-6. Pronto, com isso a **API** já estará disponível para ser utilizada na porta **80**
-7. Para testar recomendo utilizar o **Postman**, porém também é possível utilizar o 
-**Promp de Comando**
-8. Abaixo as APIs disponíveis para utilização
+7. Pronto, com isso a **API** já estará disponível para ser utilizada na porta **80**
+8. Para testar recomendo utilizar o **Postman**
+9. Abaixo as APIs disponíveis para utilização
 - Para incluir um veículo:
 ><p> curl --location --request POST 'localhost/veiculos' \<br>
 >--header 'Content-Type: application/json' \<br>
