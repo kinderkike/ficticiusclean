@@ -3,6 +3,7 @@ package com.ficticiusclean.domain.service;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.containsInRelativeOrder;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
@@ -127,6 +128,51 @@ public class PrevisaoGastoServiceTest {
 		verify(veiculoService).buscarTodos();
 	}
 	
+	@Test
+	public void deveRetornarVariasPrevisoesDeGastosCalculadosERanqueadosBaseadoNoValorGasto() {
+		Veiculo veiculoRenegade = criarVeiculoRenegade();
+		Veiculo veiculoFiesta = criarVeiculoFiesta();
+		Veiculo veiculoUno = criarVeiculoUno();
+		when(veiculoService.buscarTodos()).thenReturn(List.of(veiculoRenegade, veiculoFiesta, veiculoUno));
+		
+		PrevisaoGastoParametro previsaoGastoParametro = new PrevisaoGastoParametro();
+		previsaoGastoParametro.setPrecoCombustivel(6.89);
+		previsaoGastoParametro.setDistanciaKmCidade(8d);
+		previsaoGastoParametro.setDistanciaKmRodovia(13d);
+		
+		List<PrevisaoGasto> veiculos = previsaoGastoService.calcular(previsaoGastoParametro);
+		
+		assertFalse(veiculos.isEmpty());
+		assertEquals(3, veiculos.size(), 0);
+		assertThat(veiculos, containsInRelativeOrder(
+				allOf(
+						hasProperty("nome", is("Uno")),
+						hasProperty("marca", is("Fiat")),
+						hasProperty("modelo", is("Sporting 1.4")),
+						hasProperty("anoFabricacao", is(2013)),
+						hasProperty("volumeLitroCombustivel", is(criarNovoDecimal(1.54))),
+						hasProperty("gastoPrevisto", is(criarNovoDecimal(10.61)))
+						),
+				allOf(
+						hasProperty("nome", is("Fiesta")),
+						hasProperty("marca", is("Ford")),
+						hasProperty("modelo", is("SEL")),
+						hasProperty("anoFabricacao", is(2017)),
+						hasProperty("volumeLitroCombustivel", is(criarNovoDecimal(1.67))),
+						hasProperty("gastoPrevisto", is(criarNovoDecimal(11.51)))
+						),
+				allOf(
+						hasProperty("nome", is("Renegade")),
+						hasProperty("marca", is("JEEP")),
+						hasProperty("modelo", is("Limited")),
+						hasProperty("anoFabricacao", is(2017)),
+						hasProperty("volumeLitroCombustivel", is(criarNovoDecimal(2d))),
+						hasProperty("gastoPrevisto", is(criarNovoDecimal(13.78)))
+						)
+				));
+		verify(veiculoService).buscarTodos();
+	}
+	
 	private BigDecimal criarNovoDecimal(double valor) {
 		return BigDecimal.valueOf(valor).setScale(2, RoundingMode.HALF_UP);
 	}
@@ -150,6 +196,17 @@ public class PrevisaoGastoServiceTest {
 		veiculo.setAnoFabricacao(2017);
 		veiculo.setConsumoCidade(10d);
 		veiculo.setConsumoRodovia(15d);
+		return veiculo;
+	}
+	
+	private Veiculo criarVeiculoUno() {
+		Veiculo veiculo = criaVeiculoComId(2l);
+		veiculo.setNome("Uno");
+		veiculo.setMarca("Fiat");
+		veiculo.setModelo("Sporting 1.4");
+		veiculo.setAnoFabricacao(2013);
+		veiculo.setConsumoCidade(11d);
+		veiculo.setConsumoRodovia(16d);
 		return veiculo;
 	}
 

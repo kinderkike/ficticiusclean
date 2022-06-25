@@ -3,6 +3,7 @@ package com.ficticiusclean.domain.service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class PrevisaoGastoService {
 		for (Veiculo veiculo : veiculoService.buscarTodos()) {
 			previsoesGastos.add(calcularPrevisaoGasto(previsaoGastoParametro, veiculo));
 		}
+		previsoesGastos.sort(criarOrdenadorPorGastoPrevisto());
 		return previsoesGastos;
 	}
 
@@ -46,6 +48,14 @@ public class PrevisaoGastoService {
 	
 	private BigDecimal calcularGastoPrevisto(PrevisaoGastoParametro previsaoGastoParametro, BigDecimal volumeNecessario) {
 		return volumeNecessario.multiply(BigDecimal.valueOf(previsaoGastoParametro.getPrecoCombustivel())).setScale(2, RoundingMode.HALF_UP);
+	}
+
+	private Comparator<PrevisaoGasto> criarOrdenadorPorGastoPrevisto() {
+		return new Comparator<PrevisaoGasto>() {
+			public int compare(PrevisaoGasto o1, PrevisaoGasto o2) {
+				return o1.getGastoPrevisto().compareTo(o2.getGastoPrevisto());
+			}
+		};
 	}
 
 }
