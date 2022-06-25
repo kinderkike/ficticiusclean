@@ -10,8 +10,7 @@ import com.ficticiusclean.domain.model.PrevisaoGastoParametro;
 public class PrevisaoGastoService {
 	
 	public List<?> calcular(PrevisaoGastoParametro previsaoGastoParametro) {
-		return null;
+		return List.of();
 	}
-
 
 }
