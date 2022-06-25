@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ficticiusclean.api.model.PrevisaoGastoParametroDTO;
+import com.ficticiusclean.domain.model.PrevisaoGasto;
 import com.ficticiusclean.domain.model.PrevisaoGastoParametro;
 import com.ficticiusclean.domain.service.PrevisaoGastoService;
 
@@ -24,8 +25,8 @@ public class PrevisaoGastoController  {
 	private PrevisaoGastoService previsaoGastoService;
 	
 	@GetMapping
-	public ResponseEntity<List<?>> calcular(@Valid @RequestBody PrevisaoGastoParametroDTO previsaoGastoParametroDTO) {
-		List<?> veiculos = previsaoGastoService.calcular(criarPrevisaoGastoParametro(previsaoGastoParametroDTO));
+	public ResponseEntity<List<PrevisaoGasto>> calcular(@Valid @RequestBody PrevisaoGastoParametroDTO previsaoGastoParametroDTO) {
+		List<PrevisaoGasto> veiculos = previsaoGastoService.calcular(criarPrevisaoGastoParametro(previsaoGastoParametroDTO));
 		if (veiculos.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}

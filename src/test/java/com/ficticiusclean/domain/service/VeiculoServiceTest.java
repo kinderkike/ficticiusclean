@@ -56,7 +56,7 @@ public class VeiculoServiceTest {
 		List<Veiculo> veiculos = veiculoService.buscarTodos();
 		
 		Assert.assertFalse(veiculos.isEmpty());
-		Assert.assertEquals(1l, veiculos.size(), 0);
+		Assert.assertEquals(1, veiculos.size(), 0);
 		assertThat(veiculos, containsInAnyOrder(veiculo));
 		verify(veiculoRepository).findAll();
 	}
@@ -70,7 +70,7 @@ public class VeiculoServiceTest {
 		List<Veiculo> veiculos = veiculoService.buscarTodos();
 		
 		assertFalse(veiculos.isEmpty());
-		assertEquals(2l, veiculos.size(), 0);
+		assertEquals(2, veiculos.size(), 0);
 		assertThat(veiculos, containsInAnyOrder(
 				veiculoUm,
 				veiculoDois));

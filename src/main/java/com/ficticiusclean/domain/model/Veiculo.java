@@ -26,13 +26,13 @@ public class Veiculo {
 	private String modelo;
 
 	@Column(name = "ANO_FABRICACAO", nullable = false)
-	private int anoFabricacao;
+	private Integer anoFabricacao;
 
 	@Column(name = "CONSUMO_CIDADE", nullable = false)
-	private double consumoCidade;
+	private Double consumoCidade;
 
 	@Column(name = "CONSUMO_RODOVIA", nullable = false)
-	private double consumoRodovia;
+	private Double consumoRodovia;
 	
 	public Long getId() {
 		return id;
@@ -66,27 +66,27 @@ public class Veiculo {
 		this.modelo = modelo;
 	}
 
-	public int getAnoFabricacao() {
+	public Integer getAnoFabricacao() {
 		return anoFabricacao;
 	}
 
-	public void setAnoFabricacao(int anoFabricacao) {
+	public void setAnoFabricacao(Integer anoFabricacao) {
 		this.anoFabricacao = anoFabricacao;
 	}
 
-	public double getConsumoCidade() {
+	public Double getConsumoCidade() {
 		return consumoCidade;
 	}
 
-	public void setConsumoCidade(double consumoCidade) {
+	public void setConsumoCidade(Double consumoCidade) {
 		this.consumoCidade = consumoCidade;
 	}
 
-	public double getConsumoRodovia() {
+	public Double getConsumoRodovia() {
 		return consumoRodovia;
 	}
 
-	public void setConsumoRodovia(double consumoRodovia) {
+	public void setConsumoRodovia(Double consumoRodovia) {
 		this.consumoRodovia = consumoRodovia;
 	}
 
