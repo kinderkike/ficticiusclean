@@ -1,7 +1,8 @@
 package com.ficticiusclean.domain.service;
 
+import static java.math.RoundingMode.HALF_UP;
+
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -15,6 +16,8 @@ import com.ficticiusclean.domain.model.Veiculo;
 
 @Service
 public class PrevisaoGastoService {
+	
+	private static final int CASAS_DECIMAIS = 2; 
 
 	@Autowired
 	private VeiculoService veiculoService;
@@ -43,17 +46,17 @@ public class PrevisaoGastoService {
 	private BigDecimal calcularVolumeNecessario(Veiculo veiculo, PrevisaoGastoParametro previsaoGastoParametro) {
 		double volumeCidade = previsaoGastoParametro.getDistanciaKmCidade() / veiculo.getConsumoCidade();
 		double volumeRodovia = previsaoGastoParametro.getDistanciaKmRodovia() / veiculo.getConsumoRodovia();
-		return BigDecimal.valueOf(volumeCidade + volumeRodovia).setScale(2, RoundingMode.HALF_UP);
+		return BigDecimal.valueOf(volumeCidade + volumeRodovia).setScale(CASAS_DECIMAIS, HALF_UP);
 	}
 	
 	private BigDecimal calcularGastoPrevisto(PrevisaoGastoParametro previsaoGastoParametro, BigDecimal volumeNecessario) {
-		return volumeNecessario.multiply(BigDecimal.valueOf(previsaoGastoParametro.getPrecoCombustivel())).setScale(2, RoundingMode.HALF_UP);
+		return volumeNecessario.multiply(BigDecimal.valueOf(previsaoGastoParametro.getPrecoCombustivel())).setScale(CASAS_DECIMAIS, HALF_UP);
 	}
 
 	private Comparator<PrevisaoGasto> criarOrdenadorPorGastoPrevisto() {
 		return new Comparator<PrevisaoGasto>() {
-			public int compare(PrevisaoGasto o1, PrevisaoGasto o2) {
-				return o1.getGastoPrevisto().compareTo(o2.getGastoPrevisto());
+			public int compare(PrevisaoGasto previsaoGasto1, PrevisaoGasto previsaoGasto2) {
+				return previsaoGasto1.getGastoPrevisto().compareTo(previsaoGasto2.getGastoPrevisto());
 			}
 		};
 	}

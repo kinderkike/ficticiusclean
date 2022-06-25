@@ -6,15 +6,15 @@ import javax.validation.constraints.NotNull;
 public class PrevisaoGastoParametroDTO {
 	
 	@NotNull(message = "precoCombustivel é requerido")
-	@DecimalMin("0.1")
+	@DecimalMin(value = "0.1", message = "precoCombustivel deve ser maior ou igual a {value}")
 	private Double precoCombustivel;
 	
-	@NotNull(message = "consumoCidade é requerido")
-	@DecimalMin("0.1")
+	@NotNull(message = "distanciaKmCidade é requerido")
+	@DecimalMin(value = "0.1", message = "distanciaKmCidade deve ser maior ou igual a {value}")
 	private Double distanciaKmCidade;
 	
-	@NotNull(message = "consumoRodovia é requerido")
-	@DecimalMin("0.1")
+	@NotNull(message = "distanciaKmRodovia é requerido")
+	@DecimalMin(value = "0.1", message = "distanciaKmRodovia deve ser maior ou igual a {value}")
 	private Double distanciaKmRodovia;
 
 	public Double getPrecoCombustivel() {

@@ -1,25 +1,31 @@
 package com.ficticiusclean.api.model;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class VeiculoDTO {
 	
-	@NotNull(message = "nome é requerido")
+	@NotEmpty(message = "nome é requerido")
 	private String nome;
 	
-	@NotNull(message = "marca é requerida")
+	@NotEmpty(message = "marca é requerida")
 	private String marca;
 	
-	@NotNull(message = "modelo é requerido")
+	@NotEmpty(message = "modelo é requerido")
 	private String modelo;
 	
 	@NotNull(message = "anoFabricacao é requerido")
+	@Min(value = 1700, message = "anoFabricacao deve ser maior ou igual a {value}")
 	private Integer anoFabricacao;
 	
 	@NotNull(message = "consumoCidade é requerido")
+	@DecimalMin(value = "0.1", message = "consumoCidade deve ser maior ou igual a {value}")
 	private Double consumoCidade;
 	
 	@NotNull(message = "consumoRodovia é requerido")
+	@DecimalMin(value = "0.1", message = "consumoRodovia deve ser maior ou igual a {value}")
 	private Double consumoRodovia;
 
 	public String getNome() {
