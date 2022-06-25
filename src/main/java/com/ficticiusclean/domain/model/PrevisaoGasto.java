@@ -1,13 +1,15 @@
 package com.ficticiusclean.domain.model;
 
+import java.math.BigDecimal;
+
 public class PrevisaoGasto {
 
 	private String nome;
 	private String marca;
 	private String modelo;
 	private Integer anoFabricacao;
-	private Double volumeLitroCombustivel;
-	private Double gastoPrevisto;
+	private BigDecimal volumeLitroCombustivel;
+	private BigDecimal gastoPrevisto;
 
 	public String getNome() {
 		return nome;
@@ -41,19 +43,19 @@ public class PrevisaoGasto {
 		this.anoFabricacao = anoFabricacao;
 	}
 
-	public Double getVolumeLitroCombustivel() {
+	public BigDecimal getVolumeLitroCombustivel() {
 		return volumeLitroCombustivel;
 	}
 
-	public void setVolumeLitroCombustivel(Double volumeLitroCombustivel) {
+	public void setVolumeLitroCombustivel(BigDecimal volumeLitroCombustivel) {
 		this.volumeLitroCombustivel = volumeLitroCombustivel;
 	}
 
-	public Double getGastoPrevisto() {
+	public BigDecimal getGastoPrevisto() {
 		return gastoPrevisto;
 	}
 
-	public void setGastoPrevisto(Double gastoPrevisto) {
+	public void setGastoPrevisto(BigDecimal gastoPrevisto) {
 		this.gastoPrevisto = gastoPrevisto;
 	}
 
